@@ -3,6 +3,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 const AFFIRMATIONS = [
   "I love you michelle!",
   "You're the best!",
+  "Keep going!",
   "I'm proud of you dummy.",
   "Still stressed?",
   "MWAHHHHH",
