@@ -128,6 +128,50 @@ export default function HugHero({ dark }) {
   const sparkId = useRef(0);
   const holdTimer = useRef(null);
 
+  const playSquish = useCallback(() => {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Low thud
+    const osc1 = ctx.createOscillator();
+    const gain1 = ctx.createGain();
+    osc1.connect(gain1);
+    gain1.connect(ctx.destination);
+    osc1.type = "sine";
+    osc1.frequency.setValueAtTime(120, ctx.currentTime);
+    osc1.frequency.exponentialRampToValueAtTime(55, ctx.currentTime + 0.18);
+    gain1.gain.setValueAtTime(0.5, ctx.currentTime);
+    gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+    osc1.start(ctx.currentTime);
+    osc1.stop(ctx.currentTime + 0.22);
+
+    // Soft squish layer
+    const osc2 = ctx.createOscillator();
+    const gain2 = ctx.createGain();
+    osc2.connect(gain2);
+    gain2.connect(ctx.destination);
+    osc2.type = "triangle";
+    osc2.frequency.setValueAtTime(200, ctx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.15);
+    gain2.gain.setValueAtTime(0.25, ctx.currentTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+    osc2.start(ctx.currentTime);
+    osc2.stop(ctx.currentTime + 0.18);
+
+    // Release pop
+    const osc3 = ctx.createOscillator();
+    const gain3 = ctx.createGain();
+    osc3.connect(gain3);
+    gain3.connect(ctx.destination);
+    osc3.type = "sine";
+    osc3.frequency.setValueAtTime(60, ctx.currentTime + 0.2);
+    osc3.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.32);
+    gain3.gain.setValueAtTime(0.0, ctx.currentTime + 0.2);
+    gain3.gain.setValueAtTime(0.3, ctx.currentTime + 0.21);
+    gain3.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+    osc3.start(ctx.currentTime + 0.2);
+    osc3.stop(ctx.currentTime + 0.35);
+  }, []);
+
   // — Doodle —
   const canvasRef = useRef(null);
   const drawing = useRef(false);
@@ -174,7 +218,8 @@ export default function HugHero({ dark }) {
 
   const pressBall = useCallback(() => {
     setSqueezed(true);
-  }, []);
+    playSquish();
+  }, [playSquish]);
 
   const releaseBall = useCallback(() => {
     if (!squeezed) return;
