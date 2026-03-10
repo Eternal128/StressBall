@@ -1,107 +1,55 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  max-height: 100%;
+  overflow: hidden !important;
   margin: 0;
   padding: 0;
+  border: 0;
 }
 
 :root {
-  --bg: #faf8f4;
-  --black: #1a1612;
-  --warm: #6b5c4e;
-  --gold: #b8964a;
-  --border: rgba(26, 22, 18, 0.15);
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-sans: "Jost", system-ui, sans-serif;
-}
-
-html {
-  scroll-behavior: smooth;
+  --bg:     #faf8f4;
+  --black:  #1a1612;
+  --warm:   #6b5c4e;
+  --gold:   #b8964a;
+  --border: rgba(26,22,18,0.15);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans:    'Jost', system-ui, sans-serif;
 }
 
 body {
   font-family: var(--font-sans);
   background: var(--bg);
   color: var(--black);
-  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 @keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  30% {
-    transform: scale(1.22);
-  }
-  55% {
-    transform: scale(1.1);
-  }
+  0%, 100% { transform: scale(1); }
+  30%  { transform: scale(1.22); }
+  55%  { transform: scale(1.1); }
 }
 @keyframes ripple {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.5;
-  }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
-  }
-}
-@keyframes sparkleOut {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(0.4) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot));
-  }
+  0%   { transform: scale(0.95); opacity: 0.5; }
+  100% { transform: scale(2.6);  opacity: 0; }
 }
 @keyframes hugPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(184, 150, 74, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 0 18px rgba(184, 150, 74, 0);
-  }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184,150,74,0.3); }
+  50%       { box-shadow: 0 0 0 18px rgba(184,150,74,0); }
 }
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  overflow: hidden;
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
