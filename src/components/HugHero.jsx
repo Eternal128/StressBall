@@ -129,47 +129,47 @@ export default function HugHero({ dark }) {
   const holdTimer = useRef(null);
 
   const playSquish = useCallback(() => {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const actx = new (window.AudioContext || window.webkitAudioContext)();
 
-    // Low thud
-    const osc1 = ctx.createOscillator();
-    const gain1 = ctx.createGain();
+    // Bright click pop
+    const osc1 = actx.createOscillator();
+    const gain1 = actx.createGain();
     osc1.connect(gain1);
-    gain1.connect(ctx.destination);
+    gain1.connect(actx.destination);
     osc1.type = "sine";
-    osc1.frequency.setValueAtTime(120, ctx.currentTime);
-    osc1.frequency.exponentialRampToValueAtTime(55, ctx.currentTime + 0.18);
-    gain1.gain.setValueAtTime(0.5, ctx.currentTime);
-    gain1.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
-    osc1.start(ctx.currentTime);
-    osc1.stop(ctx.currentTime + 0.22);
+    osc1.frequency.setValueAtTime(600, actx.currentTime);
+    osc1.frequency.exponentialRampToValueAtTime(300, actx.currentTime + 0.06);
+    gain1.gain.setValueAtTime(0.6, actx.currentTime);
+    gain1.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.08);
+    osc1.start(actx.currentTime);
+    osc1.stop(actx.currentTime + 0.08);
 
-    // Soft squish layer
-    const osc2 = ctx.createOscillator();
-    const gain2 = ctx.createGain();
+    // Crisp high layer
+    const osc2 = actx.createOscillator();
+    const gain2 = actx.createGain();
     osc2.connect(gain2);
-    gain2.connect(ctx.destination);
+    gain2.connect(actx.destination);
     osc2.type = "triangle";
-    osc2.frequency.setValueAtTime(200, ctx.currentTime);
-    osc2.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.15);
-    gain2.gain.setValueAtTime(0.25, ctx.currentTime);
-    gain2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
-    osc2.start(ctx.currentTime);
-    osc2.stop(ctx.currentTime + 0.18);
+    osc2.frequency.setValueAtTime(1200, actx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(800, actx.currentTime + 0.05);
+    gain2.gain.setValueAtTime(0.3, actx.currentTime);
+    gain2.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.07);
+    osc2.start(actx.currentTime);
+    osc2.stop(actx.currentTime + 0.07);
 
-    // Release pop
-    const osc3 = ctx.createOscillator();
-    const gain3 = ctx.createGain();
+    // Tiny tail sparkle
+    const osc3 = actx.createOscillator();
+    const gain3 = actx.createGain();
     osc3.connect(gain3);
-    gain3.connect(ctx.destination);
+    gain3.connect(actx.destination);
     osc3.type = "sine";
-    osc3.frequency.setValueAtTime(60, ctx.currentTime + 0.2);
-    osc3.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.32);
-    gain3.gain.setValueAtTime(0.0, ctx.currentTime + 0.2);
-    gain3.gain.setValueAtTime(0.3, ctx.currentTime + 0.21);
-    gain3.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-    osc3.start(ctx.currentTime + 0.2);
-    osc3.stop(ctx.currentTime + 0.35);
+    osc3.frequency.setValueAtTime(900, actx.currentTime + 0.05);
+    osc3.frequency.exponentialRampToValueAtTime(1400, actx.currentTime + 0.12);
+    gain3.gain.setValueAtTime(0.0, actx.currentTime + 0.05);
+    gain3.gain.setValueAtTime(0.18, actx.currentTime + 0.06);
+    gain3.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.14);
+    osc3.start(actx.currentTime + 0.05);
+    osc3.stop(actx.currentTime + 0.14);
   }, []);
 
   // — Doodle —
